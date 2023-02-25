@@ -1,0 +1,14 @@
+C:\Users\georg\AppData\Local\JetBrains\CLion2022.1\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/cygdrive/c/Program Files/JetBrains/CLion 2022.1.1/bin/ninja/cygwin/ninja.exe" -G Ninja -S /cygdrive/c/Users/georg/Desktop/kessoku/backend -B /cygdrive/c/Users/georg/Desktop/kessoku/backend/cmake-build-debug
+-- Could NOT find Boost (missing: Boost_INCLUDE_DIR system filesystem) (Required is at least version "1.69")
+CMake Error at CMakeLists.txt:26 (add_subdirectory):
+  add_subdirectory given source "third_party" which is not an existing
+  directory.
+
+
+-- THIRD_PARTY_INCLUDE_PATH:
+CMake Error at CMakeLists.txt:32 (add_subdirectory):
+  add_subdirectory given source "app" which is not an existing directory.
+
+
+-- Configuring incomplete, errors occurred!
+See also "/cygdrive/c/Users/georg/Desktop/kessoku/backend/cmake-build-debug/CMakeFiles/CMakeOutput.log".
