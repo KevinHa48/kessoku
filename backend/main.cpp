@@ -10,9 +10,9 @@ std::mutex mtx;
 
 std::string mock_data(){
     std::string result = "";
-    for(auto i=0; i<10; i++){
+    for(auto i=0; i<30; i++){
         result.append(std::to_string(rand() % 100 + 2));
-        if (i!=9){
+        if (i!=29){
             result.append(" ");
         }
     }
