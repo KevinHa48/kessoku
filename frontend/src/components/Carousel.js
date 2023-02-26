@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useSwipeable } from "react-swipeable";
-import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
+
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 
 import "./Carousel.css";
 
@@ -13,7 +14,8 @@ export const CarouselItem = ({ children, width }) => {
   );
 };
 
-const Carousel = ({ children }) => {
+export default function Carousel({ children, handlePlay }) {
+  const [vinyl, setVinyl] = useState("0px");
   const [activeIndex, setActiveIndex] = useState(0);
   let header = "";
 
@@ -27,11 +29,6 @@ const Carousel = ({ children }) => {
     setActiveIndex(newIndex);
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => updateIndex(activeIndex + 1),
-    onSwipedRight: () => updateIndex(activeIndex - 1),
-  });
-
   if(activeIndex == 0) {
     header = "Ryo Reflection"
   } else if (activeIndex == 1) {
@@ -39,41 +36,63 @@ const Carousel = ({ children }) => {
   } else if (activeIndex == 2) {
     header = "Custom Ikuyo"
   }
-  console.log(activeIndex)
-  console.log(header)
 
   return (
-    <div {...handlers} className="carousel">
-      <div className="carousel-header">
-        <h1>{header}</h1>
-      </div>
+    <div className="carousel">
+      <div className="inner" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
+        {/* <span className="flex items-center justify-center"> */}
+          {/* <img
+            className="w-full cursor-pointer"
+            src={require("../images/bocchi_square.jpg")}
+          ></img>
+          <img
+            className={`z-[-1] !ml-[${vinyl}] absolute  transition-all `}
+            style={{ marginLeft: vinyl }}
+            src="./images/vinyl.png"
+            alt=""
+          /> */}
+          {React.Children.map(children, (child, index) => {
+            return React.cloneElement(child, { width: "100%" });
+          })}
+          <img
+            className={`z-[-1] !ml-[${vinyl}] absolute  transition-all flex items-center justify-center `}
+            style={{ marginLeft: vinyl }}
+            src="./images/vinyl.png"
+            alt=""
+            // className="flex items-center justify-center"
+          />
+        {/* </span> */}
+        </div>
+        
 
-      <div
-        className="inner"
-        style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-      >
-        {React.Children.map(children, (child, index) => {
-          return React.cloneElement(child, { width: "100%" });
-        })}
-      </div>
+        <div className="carousel-header">
+          <h1>{header}</h1>
+        </div>
 
-      <div className="indicators">
-        <button 
-            onClick={() => {
-              updateIndex(activeIndex - 1);
-            }}>
-          <NavigateBeforeIcon style={{fontSize: '350%'}} />
-        </button>
-
-        <button
-          onClick={() => {
-            updateIndex(activeIndex + 1);
-          }}>
-          <NavigateNextIcon style={{fontSize: '350%'}} />
-        </button>
-      </div>
+        <div className="indicators">
+          <span className="space-x-8">
+            <SkipPreviousIcon
+              className="!text-[2.5vw] cursor-pointer text-white hover:text-[#F6BECA]"
+              style={{ color: "lightgray" }}
+              onClick={() => {
+                updateIndex(activeIndex - 1);
+              }}
+            />
+            <PlayCircleOutlineIcon
+              onMouseEnter={() => setVinyl("20%")}
+              onMouseLeave={() => setVinyl("0px")}
+              onClick={handlePlay}
+              className="!text-[3vw] cursor-pointer text-white hover:text-[#F6BECA]"
+            />
+            <SkipNextIcon
+              className="!text-[2.5vw] cursor-pointer text-white hover:text-[#F6BECA]"
+              style={{ color: "lightgray" }}
+              onClick={() => {
+                updateIndex(activeIndex + 1);
+              }}
+            />
+          </span>
+        </div>
     </div>
   );
-};
-
-export default Carousel;
+}
