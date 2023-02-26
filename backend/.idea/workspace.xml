@@ -81,6 +81,11 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -100,6 +105,7 @@
       <workItem from="1677418416982" duration="634000" />
       <workItem from="1677419895075" duration="150000" />
       <workItem from="1677420087292" duration="80000" />
+      <workItem from="1677424668061" duration="3950000" />
     </task>
     <servers />
   </component>
@@ -116,5 +122,12 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="data" language="ObjectiveC" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

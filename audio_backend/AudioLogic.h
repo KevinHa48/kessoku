@@ -7,9 +7,15 @@
 #include <juce_dsp/juce_dsp.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdio.h>
+#include <fstream>
 
 char * fifoPipe = "/tmp/kessoku_data";
 std::mutex mtx;
+float FFT_MIN=0.0f;
+float FFT_MAX=100.0;
+float VOL_MIN=0.0f;
+float VOL_MAX=1.0f;
 
 //==============================================================================
 class AudioLogic   : public juce::AudioAppComponent,
@@ -84,8 +90,8 @@ public:
         int fd;
         fd = open(fifoPipe, O_WRONLY);
         std::string parse_result = parse_data();
+	parse_result.append("\n");
         write(fd, parse_result.c_str(), strlen(parse_result.c_str()));
-        write(fd, "\n", 1);
         close(fd);
     }
 
@@ -104,18 +110,15 @@ public:
 
     void addToBuffer()
     {
+        auto maxVolume = juce::FloatVectorOperations::findMinAndMax (fifo.data(), fftSize);
         // then render our FFT data..
         forwardFFT.performFrequencyOnlyForwardTransform (fftData.data());                   // [2]
-        auto fftMaxLevel = juce::FloatVectorOperations::findMinAndMax (fftData.data(), fftSize / 2); // [3]
-        auto maxLevel = juce::FloatVectorOperations::findMinAndMax(fifo.data(), fftSize / 2);
+        auto maxFFT = juce::FloatVectorOperations::findMinAndMax (fftData.data(), fftSize * 2);
         std::lock_guard<std::mutex> _(mtx);
+        std::fill (std::begin(data_buffer), std::end(data_buffer), 0.0f);
         for(unsigned long y=0; y<fifo.size(); y++) {
-            auto skewedProportionY = 1.0f - std::exp(std::log((float) y / (float) 512) * 0.2f);
-            auto fftDataIndex = (size_t) juce::jlimit(0, fftSize / 2, (int) (skewedProportionY * fftSize / 2));
-            auto fft_level = juce::jmap(fftData[fftDataIndex], 0.0f, juce::jmax(fftMaxLevel.getEnd(), 1e-5f), 0.0f,
-                                        30.0f);
-            auto volume_level = juce::jmap(fifo[fftDataIndex], juce::jmin(-1e-5f, maxLevel.getStart()),
-                                           juce::jmax(maxLevel.getEnd(), 1e-5f), 0.0f, 10.0f);
+            auto fft_level = juce::jmap(fftData[y], juce::jmin(FFT_MIN, maxFFT.getStart()), juce::jmax(FFT_MAX, maxFFT.getEnd()), 0.0f, 30.0f);
+            auto volume_level = juce::jmap(std::fabs(fifo[y]), juce::jmin(VOL_MIN, maxVolume.getStart()) , juce::jmax(VOL_MAX, maxVolume.getEnd()), 0.0f, 10.0f);
             data_buffer[(int) std::round(fft_level)] = volume_level;
         }
     }

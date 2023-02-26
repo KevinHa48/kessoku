@@ -14,23 +14,23 @@ void update(){
     while (true){
         int fd;
         fd = open(fifoPipe, O_RDONLY);
-        read(fd, data, sizeof(data));
         memset(data, 0, sizeof(data));
+        read(fd, data, sizeof(data));
         close(fd);
     }
 }
 
 [[noreturn]] void loop() {
     while (true) {
-        if (data != nullptr) {
-            std::string result;
-            result.append(data);
+        std::string result;
+        result.append(data);
+        if (result != ""){
             for (auto user: users) {
                 user->send_text(result);
             }
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+	}
 }
 
 int main()
@@ -57,6 +57,8 @@ int main()
 
     std::thread t1(loop);
     std::thread t2(update);
-
+    std::thread t3(update);
+    std::thread t4(update);
+    std::thread t5(update);
     app.port(port).run();
 }
