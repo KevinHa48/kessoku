@@ -4,8 +4,15 @@ export default function InitialScene({ enable, style, data, prevData, scale }) {
       <a-scene vr-mode-ui="enabled: false">
         <a-marker preset="hiro">
           {/* two basic cubes side by side */}
-          {/* <a-box position="0 0 0" material="color: red;"></a-box>
-          <a-box position="1 0 0" material="color: green;"></a-box> */}
+          {/* {/* <a-box position="0 0 0" material="color: red;"></a-box> */}
+          <a-box
+            src="./vaporwave-texture.jpg"
+            position="0 -0.1 0"
+            height="0.0001"
+            depth="6"
+            width="6"
+            material="color: white;"
+          ></a-box>
 
           {enable ? (
             <Scene
@@ -17,7 +24,6 @@ export default function InitialScene({ enable, style, data, prevData, scale }) {
           ) : (
             <></>
           )}
-
           {/* double animation */}
           {/* <a-entity
             rotation="0 0 0"
@@ -43,24 +49,32 @@ export default function InitialScene({ enable, style, data, prevData, scale }) {
   );
 }
 
-const Scene = ({ style, data, prevData, scale }) => {
+const Scene = ({ style, prevData, scale }) => {
+  let data =
+    "0 0.5 .1 1 2 0 10 5 0 0 1.2 0 0 5.5 0 0 0 0 0 7 7 7 0 0 0 0 10 10 0 0".split(
+      " "
+    );
+
   /**
    * Reflection
    */
-  if (style === "reflection") {
+  if (style.style === "reflection") {
     return data ? (
       data.map((x, i) => (
         <a-box
-          position={`${(i * 0.2 - 3).toString()} 0 0`}
-          width="0.2"
-          depth="0.2"
-          height={(Number(x) / scale).toString()}
+          position={`${(
+            i * style.width -
+            Number(style.width) * 15
+          ).toString()} 2 0`}
+          width={style.width}
+          depth={style.depth}
+          height={Number(x) === 0 ? "0.0001" : (Number(x) / scale).toString()}
           material={
-            i % 3 === 0
-              ? "color: red;"
-              : i % 3 === 1
-              ? "color: green;"
-              : "color: blue;"
+            i < 10
+              ? `color: ${style.colors[0]}`
+              : i < 20
+              ? `color: ${style.colors[1]}`
+              : `color: ${style.colors[2]}`
           }
           // animation={`property: height; from: ${(
           //   Number(x) / scale
@@ -70,28 +84,43 @@ const Scene = ({ style, data, prevData, scale }) => {
     ) : (
       <></>
     );
-  } else if (style === "histogram") {
+  } else if (style.style === "histogram") {
     /**
      * Histogram
      */
     return data ? (
       data.map((x, i) => {
         let initialHeight = Number(data[0]) / scale;
+        // console.log(
+        //   (Number(x) / scale - initialHeight) / 2 + initialHeight / 2
+        // );
 
         return (
           <a-box
-            position={`${(i * 0.2 - 3).toString()} ${
-              (Number(x) / scale - initialHeight) / 2 + initialHeight / 2 - 1
+            // metalness="0.5"
+            src="./texture.jpg"
+            repeat="100 100"
+            position={`${(
+              i * style.width -
+              Number(style.width) * 15
+            ).toString()} ${
+              Number(x) === 0
+                ? "0.0001"
+                : (
+                    (Number(x) / scale - initialHeight) / 2 +
+                    initialHeight / 2
+                  ).toString()
             } 0`}
-            width="0.2"
-            depth="0.2"
-            height={(Number(x) / scale).toString()}
+            width={style.width}
+            depth={style.depth}
+            height={Number(x) === 0 ? "0.0001" : (Number(x) / scale).toString()}
             material={
-              i % 3 === 0
-                ? "color: red;"
-                : i % 3 === 1
-                ? "color: green;"
-                : "color: blue;"
+              "" +
+              (i < 10
+                ? `color: ${style.colors[0]}`
+                : i < 20
+                ? `color: ${style.colors[1]}`
+                : `color: ${style.colors[2]}`)
             }
           ></a-box>
         );

@@ -4,7 +4,7 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 
 export default function Landing({ handlePlay }) {
   return (
-    <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-70 flex items-center justify-center">
+    <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-80 flex items-center justify-center">
       <div className="flex flex-col items-center space-y-6">
         <img
           className="h-[50%]"
