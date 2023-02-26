@@ -1,3 +1,0 @@
-/home/gcarvellas/Desktop/kessoku/backend/CMakeFiles/main.dir
-/home/gcarvellas/Desktop/kessoku/backend/CMakeFiles/edit_cache.dir
-/home/gcarvellas/Desktop/kessoku/backend/CMakeFiles/rebuild_cache.dir
