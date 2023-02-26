@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/gcarvellas/Desktop/kessoku/backend/build",
+  "command": "/usr/bin/g++-11   -g -o CMakeFiles/main.dir/main.cpp.o -c /home/gcarvellas/Desktop/kessoku/backend/main.cpp",
+  "file": "/home/gcarvellas/Desktop/kessoku/backend/main.cpp"
+}
+]
