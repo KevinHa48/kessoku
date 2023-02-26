@@ -11,18 +11,18 @@ ws.onopen = () => {
 };
 
 function App() {
-  const [x, setX] = useState("");
+  const [WSData, setWSData] = useState("");
+  const [style, setStyle] = useState("reflection");
 
   ws.onmessage = (e) => {
     let res = e.data;
-    setX(res);
-    console.log(x);
+    setWSData(res);
   };
 
   return (
     <>
-      <Landing x={x} />
-      <InitialScene data={x.split(" ")} scale={20} />
+      <Landing />
+      <InitialScene style={style} data={WSData.split(" ")} scale={20} />
     </>
   );
 }

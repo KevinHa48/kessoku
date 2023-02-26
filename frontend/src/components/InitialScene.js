@@ -1,59 +1,13 @@
-export default function InitialScene({ data, scale }) {
+export default function InitialScene({ style, data, scale }) {
   return (
-    <div className="w-full h-full">
+    <div className="relative w-full h-full z-[-1]">
       <a-scene vr-mode-ui="enabled: false">
         <a-marker preset="hiro">
           {/* two basic cubes side by side */}
           {/* <a-box position="0 0 0" material="color: red;"></a-box>
           <a-box position="1 0 0" material="color: green;"></a-box> */}
 
-          {/* reflection style */}
-          {/* {data ? (
-            data.map((x, i) => (
-              <a-box
-                position={`${(i * 0.2).toString()} 0 0`}
-                width="0.2"
-                depth="0.2"
-                height={(Number(x) / 10).toString()}
-                material={
-                  i % 3 === 0
-                    ? "color: red;"
-                    : i % 3 === 1
-                    ? "color: green;"
-                    : "color: blue;"
-                }
-              ></a-box>
-            ))
-          ) : (
-            <></>
-          )} */}
-
-          {/* histogram style: position x = width w, position y=(height_curr-height_first)/2 */}
-          {data ? (
-            data.map((x, i) => {
-              let initialHeight = Number(data[0]) / scale;
-
-              return (
-                <a-box
-                  position={`${(i * 0.2).toString()} ${
-                    (Number(x) / scale - initialHeight) / 2 + initialHeight / 2
-                  } 0`}
-                  width="0.2"
-                  depth="0.2"
-                  height={(Number(x) / scale).toString()}
-                  material={
-                    i % 3 === 0
-                      ? "color: red;"
-                      : i % 3 === 1
-                      ? "color: green;"
-                      : "color: blue;"
-                  }
-                ></a-box>
-              );
-            })
-          ) : (
-            <></>
-          )}
+          <Scene style={style} data={data} scale={scale} />
 
           {/* double animation */}
           {/* <a-entity rotation="0 0 0" position="0 0 0" height="1"
@@ -68,3 +22,59 @@ export default function InitialScene({ data, scale }) {
     </div>
   );
 }
+
+const Scene = ({ style, scale, data }) => {
+  /**
+   * Reflection
+   */
+  if (style === "reflection") {
+    return data ? (
+      data.map((x, i) => (
+        <a-box
+          position={`${(i * 0.2 - 3).toString()} 0 0`}
+          width="0.2"
+          depth="0.2"
+          height={(Number(x) / scale).toString()}
+          material={
+            i % 3 === 0
+              ? "color: red;"
+              : i % 3 === 1
+              ? "color: green;"
+              : "color: blue;"
+          }
+        ></a-box>
+      ))
+    ) : (
+      <></>
+    );
+  } else if (style === "histogram") {
+    /**
+     * Histogram
+     */
+    return data ? (
+      data.map((x, i) => {
+        let initialHeight = Number(data[0]) / scale;
+
+        return (
+          <a-box
+            position={`${(i * 0.2 - 3).toString()} ${
+              (Number(x) / scale - initialHeight) / 2 + initialHeight / 2 - 1
+            } 0`}
+            width="0.2"
+            depth="0.2"
+            height={(Number(x) / scale).toString()}
+            material={
+              i % 3 === 0
+                ? "color: red;"
+                : i % 3 === 1
+                ? "color: green;"
+                : "color: blue;"
+            }
+          ></a-box>
+        );
+      })
+    ) : (
+      <></>
+    );
+  }
+};
