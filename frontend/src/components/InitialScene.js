@@ -1,4 +1,4 @@
-export default function InitialScene({ style, data, prevData, scale }) {
+export default function InitialScene({ enable, style, data, prevData, scale }) {
   return (
     <div className="relative w-full h-full z-[-1]">
       <a-scene vr-mode-ui="enabled: false">
@@ -7,7 +7,16 @@ export default function InitialScene({ style, data, prevData, scale }) {
           {/* <a-box position="0 0 0" material="color: red;"></a-box>
           <a-box position="1 0 0" material="color: green;"></a-box> */}
 
-          <Scene style={style} data={data} prevData={prevData} scale={scale} />
+          {enable ? (
+            <Scene
+              style={style}
+              data={data}
+              prevData={prevData}
+              scale={scale}
+            />
+          ) : (
+            <></>
+          )}
 
           {/* double animation */}
           {/* <a-entity
