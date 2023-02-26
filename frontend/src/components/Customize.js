@@ -17,7 +17,11 @@ export default function Customize({ handleStyle }) {
             <label>Style</label>
           </td>
           <td>
-            <select name="style" ref={styleRef}>
+            <select
+              className="[&>option]:text-black"
+              name="style"
+              ref={styleRef}
+            >
               <option value="histogram">Bar</option>
               <option value="reflection">Reflection</option>
             </select>
@@ -28,7 +32,7 @@ export default function Customize({ handleStyle }) {
             <label>Width</label>
           </td>
           <td>
-            <input type="number" ref={widthRef} defaultValue="0.2" />
+            <input type="number" ref={widthRef} defaultValue="0.2" step="0.1" />
           </td>
         </tr>
         <tr>
@@ -36,7 +40,7 @@ export default function Customize({ handleStyle }) {
             <label>Depth</label>
           </td>
           <td>
-            <input type="number" ref={depthRef} defaultValue="0.2" />
+            <input type="number" ref={depthRef} defaultValue="0.2" step="0.1" />
           </td>
         </tr>
         <tr>
@@ -72,7 +76,7 @@ export default function Customize({ handleStyle }) {
             ],
           })
         }
-        className="text-white"
+        className="mt-8 text-white text-3xl"
       >
         Submit
       </button>

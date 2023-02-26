@@ -54,7 +54,7 @@ function App() {
         width: "0.2",
         depth: "0.2",
         gap: "0",
-        colors: ["#FFFFFF", "#EDD280", "#C3A95A"],
+        colors: ["#1A3561", "#EDD280", "#C3A95A"],
       });
     } else if (opt === "kita") {
       setToggleCustomize(true);
