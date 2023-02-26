@@ -2,7 +2,7 @@ export default function InitialScene({ style, data, scale }) {
   return (
     <div className="relative w-full h-full z-[-1]">
       <a-scene vr-mode-ui="enabled: false">
-        <a-marker preset="hiro">
+          <a-marker preset="custom" type="pattern" url="./markers/HRU_2.patt">
           {/* two basic cubes side by side */}
           {/* <a-box position="0 0 0" material="color: red;"></a-box>
           <a-box position="1 0 0" material="color: green;"></a-box> */}
