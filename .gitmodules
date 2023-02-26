@@ -1,0 +1,6 @@
+[submodule "backend/third_party/json"]
+	path = backend/third_party/json
+	url = https://github.com/nlohmann/json.git
+[submodule "backend/third_party/spdlog"]
+	path = backend/third_party/spdlog
+	url = https://github.com/gabime/spdlog.git
