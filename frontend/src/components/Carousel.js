@@ -13,6 +13,7 @@ export const CarouselItem = ({ children, width }) => {
 
 const Carousel = ({ children }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  let header = "";
 
   const updateIndex = (newIndex) => {
     if (newIndex < 0) {
@@ -29,8 +30,21 @@ const Carousel = ({ children }) => {
     onSwipedRight: () => updateIndex(activeIndex - 1),
   });
 
+  if(activeIndex == 0) {
+    header = "Ryo Reflection"
+  } else if (activeIndex == 1) {
+    header = "Natural Nijika"
+  } else if (activeIndex == 2) {
+    header = "Custom Ikuyo"
+  }
+  console.log(activeIndex)
+  console.log(header)
+
   return (
     <div {...handlers} className="carousel">
+      <div className="carousel-header">
+        <h1>{header}</h1>
+      </div>
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}

@@ -73,13 +73,13 @@ function App() {
             } hover:text-[#F6BECA]`}
           />
           <Carousel>
-            <CarouselItem background-image="./images/ryo_square.jpg">
+            <CarouselItem>
               <img src="./images/ryo_square.jpg"></img>
             </CarouselItem>
-            <CarouselItem background-image="./images/ryo_square.jpg">
+            <CarouselItem>
               <img src="./images/nijika_square.jpg"></img>
             </CarouselItem>
-            <CarouselItem background-image="./images/ryo_square.jpg">
+            <CarouselItem>
               <img
                 onClick={handleCarousel}
                 src="./images/ikuyo_square.png"
