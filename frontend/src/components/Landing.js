@@ -23,7 +23,7 @@ export default function Landing({ handlePlay }) {
           />
         </span>
 
-        <h1 className="text-white text-3xl">Kessoku</h1>
+        <h1 className="text-white text-4xl">Kessoku</h1>
 
         <span className="space-x-8">
           <SkipPreviousIcon

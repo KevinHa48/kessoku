@@ -15,6 +15,7 @@ ws.onopen = () => {
 };
 
 function App() {
+  const [vinyl, setVinyl] = useState("0px");
   const [WSData, setWSData] = useState("");
   const [prevWSData, setPrevWSData] = useState("");
   const [style, setStyle] = useState({
@@ -63,6 +64,10 @@ function App() {
     }
   }
 
+  function handleVinyl(x) {
+    setVinyl(x);
+  }
+
   ws.onmessage = (e) => {
     let res = e.data;
     setPrevWSData(WSData);
@@ -96,27 +101,54 @@ function App() {
               play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
             } hover:text-[#F6BECA]`}
           />
-          <Carousel>
+          <Carousel handleVinyl={handleVinyl}>
             <CarouselItem>
-              <img
-                className="cursor-pointer"
-                onClick={() => handleCarousel("ryou")}
-                src="./images/ryo_square.jpg"
-              ></img>
+              <span className="flex items-center justify-center">
+                <img
+                  className={`z-[-1] !ml-[${vinyl}] absolute transition-all flex items-center justify-center `}
+                  style={{ marginLeft: vinyl }}
+                  src="./images/vinyl.png"
+                  alt=""
+                  // className="flex items-center justify-center"
+                />
+                <img
+                  className="cursor-pointer"
+                  onClick={() => handleCarousel("ryou")}
+                  src="./images/ryo_square.jpg"
+                ></img>
+              </span>
             </CarouselItem>
             <CarouselItem>
-              <img
-                className="cursor-pointer"
-                onClick={() => handleCarousel("nijika")}
-                src="./images/nijika_square.jpg"
-              ></img>
+              <span className="flex items-center justify-center">
+                <img
+                  className={`z-[-1] !ml-[${vinyl}] absolute transition-all flex items-center justify-center `}
+                  style={{ marginLeft: vinyl }}
+                  src="./images/vinyl.png"
+                  alt=""
+                  // className="flex items-center justify-center"
+                />
+                <img
+                  className="cursor-pointer"
+                  onClick={() => handleCarousel("nijika")}
+                  src="./images/nijika_square.jpg"
+                ></img>
+              </span>
             </CarouselItem>
             <CarouselItem>
-              <img
-                className="cursor-pointer"
-                onClick={() => handleCarousel("kita")}
-                src="./images/ikuyo_square.png"
-              ></img>
+              <span className="flex items-center justify-center">
+                <img
+                  className={`z-[-1] !ml-[${vinyl}] absolute transition-all flex items-center justify-center `}
+                  style={{ marginLeft: vinyl }}
+                  src="./images/vinyl.png"
+                  alt=""
+                  // className="flex items-center justify-center"
+                />
+                <img
+                  className="cursor-pointer"
+                  onClick={() => handleCarousel("kita")}
+                  src="./images/ikuyo_square.png"
+                ></img>
+              </span>
             </CarouselItem>
           </Carousel>
         </div>
