@@ -22,7 +22,7 @@ class AudioLogic   : public juce::AudioAppComponent,
                                private juce::Timer
 {
 public:
-    float data_buffer[30];
+    float data_buffer[60];
 
     AudioLogic()
             : forwardFFT (fftOrder)
@@ -117,7 +117,7 @@ public:
         std::lock_guard<std::mutex> _(mtx);
         std::fill (std::begin(data_buffer), std::end(data_buffer), 0.0f);
         for(unsigned long y=0; y<fifo.size(); y++) {
-            auto fft_level = juce::jmap(fftData[y], juce::jmin(FFT_MIN, maxFFT.getStart()), juce::jmax(FFT_MAX, maxFFT.getEnd()), 0.0f, 30.0f);
+            auto fft_level = juce::jmap(fftData[y], juce::jmin(FFT_MIN, maxFFT.getStart()), juce::jmax(FFT_MAX, maxFFT.getEnd()), 0.0f, 60.0f);
             auto volume_level = juce::jmap(std::fabs(fifo[y]), juce::jmin(VOL_MIN, maxVolume.getStart()) , juce::jmax(VOL_MAX, maxVolume.getEnd()), 0.0f, 10.0f);
             data_buffer[(int) std::round(fft_level)] = volume_level;
         }
