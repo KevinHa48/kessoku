@@ -11,7 +11,7 @@ export default function Customize({ handleStyle }) {
 
   return (
     <div className="fixed flex flex-col justify-center items-center w-screen h-screen backdrop-blur-md bg-black bg-opacity-80">
-      <table className="[&>tr>td]:!p-4 [&>tr>td]:!px-10 [&>tr>td>label]:text-white [&>tr>td>label]:text-3xl">
+      <table className="[&>tr>td]:!p-4 [&>tr>td]:!px-10 [&>tr>td>label]:text-white [&>tr>td>label]:text-3xl [&>tr>td>*]:bg-transparent [&>tr>td>*]:text-white [&>tr>td>*]:text-3xl">
         <tr>
           <td>
             <label>Style</label>

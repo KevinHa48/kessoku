@@ -56,8 +56,8 @@ export default function InitialScene({ enable, style, data, prevData, scale }) {
   );
 }
 
-const Scene = ({ style, prevData, scale }) => {
-  let data =
+const Scene = ({ style, data, prevData, scale }) => {
+  data =
     "0 0.5 .1 1 2 0 10 5 0 0 1.2 0 0 5.5 0 0 0 0 0 7 7 7 0 0 0 0 10 10 0 0".split(
       " "
     );
@@ -72,7 +72,7 @@ const Scene = ({ style, prevData, scale }) => {
           position={`${(
             i * (style.width + style.gap) -
             Number(style.width + style.gap) * 15
-          ).toString()} 2 0`}
+          ).toString()} 2 0.5`}
           width={style.width}
           depth={style.depth}
           height={Number(x) === 0 ? "0.0001" : (Number(x) / scale).toString()}
@@ -105,7 +105,7 @@ const Scene = ({ style, prevData, scale }) => {
         return (
           <a-box
             // metalness="0.5"
-            // src="./texture.jpg"
+
             // repeat="100 100"
             position={`${(
               i * (style.width + style.gap) -

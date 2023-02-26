@@ -7,7 +7,7 @@ import InitialScene from "./components/InitialScene";
 import Customize from "./components/Customize";
 import Carousel, { CarouselItem } from "./components/Carousel";
 
-let wsURL = "ws://172.20.10.4:18080/audio";
+let wsURL = "ws://172.20.10.11:18080/audio";
 let ws = new WebSocket(wsURL);
 
 ws.onopen = () => {
@@ -18,7 +18,7 @@ function App() {
   const [WSData, setWSData] = useState("");
   const [prevWSData, setPrevWSData] = useState("");
   const [style, setStyle] = useState({
-    style: "histogram",
+    style: "reflection",
     width: "0.2",
     depth: "0.2",
     gap: "0",
@@ -38,9 +38,27 @@ function App() {
     setToggleCustomize(false);
   }
 
-  function handleCarousel() {
-    setToggleCustomize(true);
+  function handleCarousel(opt) {
     setToggleCarousel(false);
+    if (opt === "ryou") {
+      setStyle({
+        style: "reflection",
+        width: "0.1",
+        depth: "0.1",
+        gap: "4",
+        colors: ["#758EB6", "#4272BF", "#1A3561"],
+      });
+    } else if (opt === "nijika") {
+      setStyle({
+        style: "histogram",
+        width: "0.2",
+        depth: "0.2",
+        gap: "0",
+        colors: ["#FFFFFF", "#EDD280", "#C3A95A"],
+      });
+    } else if (opt === "kita") {
+      setToggleCustomize(true);
+    }
   }
 
   ws.onmessage = (e) => {
@@ -73,15 +91,24 @@ function App() {
       {toggleCarousel ? (
         <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-80 flex items-center justify-center">
           <Carousel>
-            <CarouselItem background-image="./images/ryo_square.jpg">
-              <img src="./images/ryo_square.jpg"></img>
-            </CarouselItem>
-            <CarouselItem background-image="./images/ryo_square.jpg">
-              <img src="./images/nijika_square.jpg"></img>
-            </CarouselItem>
-            <CarouselItem background-image="./images/ryo_square.jpg">
+            <CarouselItem>
               <img
-                onClick={handleCarousel}
+                className="cursor-pointer"
+                onClick={() => handleCarousel("ryou")}
+                src="./images/ryo_square.jpg"
+              ></img>
+            </CarouselItem>
+            <CarouselItem>
+              <img
+                className="cursor-pointer"
+                onClick={() => handleCarousel("nijika")}
+                src="./images/nijika_square.jpg"
+              ></img>
+            </CarouselItem>
+            <CarouselItem>
+              <img
+                className="cursor-pointer"
+                onClick={() => handleCarousel("kita")}
                 src="./images/ikuyo_square.png"
               ></img>
             </CarouselItem>
