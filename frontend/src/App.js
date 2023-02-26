@@ -52,12 +52,6 @@ function App() {
 
   return (
     <>
-      <ArrowBackIcon
-        // onClick="{handleBack}"
-        className={`fixed !text-[3vw] z-0 top-0 right-50 m-8 cursor-pointer text-white ${
-          play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
-        } hover:text-[#F6BECA]`}
-      />
       <MoreHorizIcon
         className={`fixed !text-[3vw] z-10 top-0 right-0 m-8 cursor-pointer text-white ${
           play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
@@ -71,7 +65,13 @@ function App() {
         <Landing handlePlay={handlePlay} />
       )}
       {toggleCarousel ? (
-        <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-80 flex items-center justify-center">
+        <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-80 ">
+          <ArrowBackIcon
+            onClick={() => setToggleCarousel(false)}
+            className={`fixed !text-[3vw] z-0 top-0 right-50 m-8 cursor-pointer text-white ${
+              play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
+            } hover:text-[#F6BECA]`}
+          />
           <Carousel>
             <CarouselItem background-image="./images/ryo_square.jpg">
               <img src="./images/ryo_square.jpg"></img>
