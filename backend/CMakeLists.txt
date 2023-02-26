@@ -36,7 +36,17 @@ add_subdirectory(third_party/JUCE)                   # If you've put JUCE in a s
 # up by default. This function accepts many optional arguments. Check the readme at
 # `docs/CMake API.md` in the JUCE repo for the full list.
 
-add_executable(backend main.cpp)
+if(APPLE)
+        link_directories("/opt/homebrew/lib")
+        include_directories("/opt/homebrew/include")
+endif(APPLE)
+
+juce_add_gui_app(backend PRODUCT_NAME "backend")
+
+target_sources(backend
+        PRIVATE
+        main.cpp
+        )
 
 #juce_add_gui_app(backend
 #        # VERSION ...                       # Set this if the app version is different to the project version
