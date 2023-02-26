@@ -101,7 +101,7 @@ function App() {
               play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
             } hover:text-[#F6BECA]`}
           />
-          <Carousel handleVinyl={handleVinyl}>
+          <Carousel handleVinyl={handleVinyl} handleCarousel={handleCarousel}>
             <CarouselItem>
               <span className="flex items-center justify-center">
                 <img
