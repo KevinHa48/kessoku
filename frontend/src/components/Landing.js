@@ -1,44 +1,33 @@
-export default function InitialScene({ enable, style, data, prevData, scale }) {
+import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+
+export default function Landing({ handlePlay }) {
   return (
-    <div className="relative w-full h-full z-[-1]">
-      <a-scene vr-mode-ui="enabled: false">
-        <a-marker preset="hiro">
-          {/* two basic cubes side by side */}
-          {/* <a-box position="0 0 0" material="color: red;"></a-box>
-          <a-box position="1 0 0" material="color: green;"></a-box> */}
+    <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-70 flex items-center justify-center">
+      <div className="flex flex-col items-center space-y-6">
+        <img
+          className="h-[50%]"
+          src={require("../images/bocchi_square.jpg")}
+        ></img>
 
-          {enable ? (
-            <Scene
-              style={style}
-              data={data}
-              prevData={prevData}
-              scale={scale}
-            />
-          ) : (
-            <></>
-          )}
+        <h1 className="text-white text-3xl">Kessoku</h1>
 
-          {/* double animation */}
-          {/* <a-entity
-            rotation="0 0 0"
-            position="0 0 0"
-            height="1"
-            // animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
-            // animation="property: height; to: 2, dur: 2000; easing: linear; loop: true"
-            animation="property: position; to: 0 1.5 0; dur: 2000; easing: linear; loop: true"
-          > */}
-          {/* <a-box
-            position="0 0 0"
-            width="1"
-            height="1"
-            depth="1"
-            color="pink"
-            animation="property: height; to: 3, dur: 2000; easing: linear; loop: true"
-          ></a-box> */}
-          {/* </a-entity> */}
-        </a-marker>
-        <a-entity camera="userHeight: 0;"></a-entity>
-      </a-scene>
+        <span className="space-x-8">
+          <SkipPreviousIcon
+            className="!text-[2vw]"
+            style={{ color: "lightgray" }}
+          />
+          <PlayCircleOutlineIcon
+            onClick={handlePlay}
+            className="!text-[3.5vw] cursor-pointer text-white hover:text-[#F6BECA]"
+          />
+          <SkipNextIcon
+            className="!text-[2vw]"
+            style={{ color: "lightgray" }}
+          />
+        </span>
+      </div>
     </div>
   );
 }

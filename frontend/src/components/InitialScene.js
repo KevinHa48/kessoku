@@ -1,4 +1,4 @@
-export default function InitialScene({ style, data, scale }) {
+export default function InitialScene({ enable, style, data, prevData, scale }) {
   return (
     <div className="relative w-full h-full z-[-1]">
       <a-scene vr-mode-ui="enabled: false">
@@ -7,15 +7,35 @@ export default function InitialScene({ style, data, scale }) {
           {/* <a-box position="0 0 0" material="color: red;"></a-box>
           <a-box position="1 0 0" material="color: green;"></a-box> */}
 
-          <Scene style={style} data={data} scale={scale} />
+          {enable ? (
+            <Scene
+              style={style}
+              data={data}
+              prevData={prevData}
+              scale={scale}
+            />
+          ) : (
+            <></>
+          )}
 
           {/* double animation */}
-          {/* <a-entity rotation="0 0 0" position="0 0 0" height="1"
-              // animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
-              // animation="property: height; to: 2, dur: 2000; easing: linear; loop: true"
-              animation="property: position; to: 2 0 0; dur: 2000; easing: linear; loop: true">
-              <a-box position="0 0 0" height="1" color="pink" animation="property: height; to: 3, dur: 2000; easing: linear; loop: true"></a-box>
-          </a-entity> */}
+          {/* <a-entity
+            rotation="0 0 0"
+            position="0 0 0"
+            height="1"
+            // animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
+            // animation="property: height; to: 2, dur: 2000; easing: linear; loop: true"
+            animation="property: position; to: 0 1.5 0; dur: 2000; easing: linear; loop: true"
+          > */}
+          {/* <a-box
+            position="0 0 0"
+            width="1"
+            height="1"
+            depth="1"
+            color="pink"
+            animation="property: height; to: 3, dur: 2000; easing: linear; loop: true"
+          ></a-box> */}
+          {/* </a-entity> */}
         </a-marker>
         <a-entity camera="userHeight: 0;"></a-entity>
       </a-scene>
@@ -23,7 +43,7 @@ export default function InitialScene({ style, data, scale }) {
   );
 }
 
-const Scene = ({ style, scale, data }) => {
+const Scene = ({ style, data, prevData, scale }) => {
   /**
    * Reflection
    */
@@ -42,6 +62,9 @@ const Scene = ({ style, scale, data }) => {
               ? "color: green;"
               : "color: blue;"
           }
+          // animation={`property: height; from: ${(
+          //   Number(x) / scale
+          // ).toString()}, dur: 100; easing: easeInExpo; loop: true`}
         ></a-box>
       ))
     ) : (
