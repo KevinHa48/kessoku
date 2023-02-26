@@ -57,10 +57,10 @@ export default function InitialScene({ enable, style, data, prevData, scale }) {
 }
 
 const Scene = ({ style, data, prevData, scale }) => {
-  data =
-    "0 0.5 .1 1 2 0 10 5 0 0 1.2 0 0 5.5 0 0 0 0 0 7 7 7 0 0 0 0 10 10 0 0".split(
-      " "
-    );
+  // data =
+  //   "0 0.5 .1 1 2 0 10 5 0 0 1.2 0 0 5.5 0 0 0 0 0 7 7 7 0 0 0 0 10 10 0 0".split(
+  //     " "
+  //   );
 
   /**
    * Reflection
@@ -71,15 +71,15 @@ const Scene = ({ style, data, prevData, scale }) => {
         <a-box
           position={`${(
             i * (style.width + style.gap) -
-            Number(style.width + style.gap) * 15
+            Number(style.width + style.gap) * 30
           ).toString()} 2 0.5`}
           width={style.width}
           depth={style.depth}
           height={Number(x) === 0 ? "0.0001" : (Number(x) / scale).toString()}
           material={
-            i < 10
+            i < 20
               ? `color: ${style.colors[0]}`
-              : i < 20
+              : i < 40
               ? `color: ${style.colors[1]}`
               : `color: ${style.colors[2]}`
           }
@@ -109,7 +109,7 @@ const Scene = ({ style, data, prevData, scale }) => {
             // repeat="100 100"
             position={`${(
               i * (style.width + style.gap) -
-              Number(style.width + style.gap) * 15
+              Number(style.width + style.gap) * 30
             ).toString()} ${
               Number(x) === 0
                 ? "0.0001"
@@ -123,9 +123,9 @@ const Scene = ({ style, data, prevData, scale }) => {
             height={Number(x) === 0 ? "0.0001" : (Number(x) / scale).toString()}
             material={
               "" +
-              (i < 10
+              (i < 20
                 ? `color: ${style.colors[0]}`
-                : i < 20
+                : i < 40
                 ? `color: ${style.colors[1]}`
                 : `color: ${style.colors[2]}`)
             }

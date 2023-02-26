@@ -80,6 +80,12 @@ export default function Customize({ handleStyle }) {
       >
         Submit
       </button>
+      <button
+        onClick={() => handleStyle({}, true)}
+        className="mt-8 text-white text-xl"
+      >
+        Cancel
+      </button>
     </div>
   );
 }

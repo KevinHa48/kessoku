@@ -32,9 +32,11 @@ function App() {
     play ? setPlay(false) : setPlay(true);
   }
 
-  function handleStyle(obj) {
-    console.log(obj);
-    setStyle(obj);
+  function handleStyle(obj, cancel) {
+    if (cancel) {
+      console.log(obj);
+      setStyle(obj);
+    }
     setToggleCustomize(false);
   }
 
@@ -70,12 +72,16 @@ function App() {
 
   return (
     <>
-      <MoreHorizIcon
-        className={`fixed !text-[3vw] z-10 top-0 right-0 m-8 cursor-pointer text-white ${
-          play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
-        } hover:text-[#F6BECA]`}
-        onClick={() => setToggleCarousel(true)}
-      />
+      {!toggleCustomize ? (
+        <MoreHorizIcon
+          className={`fixed !text-[3vw] z-10 top-0 right-0 m-8 cursor-pointer text-white ${
+            play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
+          } hover:text-[#F6BECA]`}
+          onClick={() => setToggleCarousel(true)}
+        />
+      ) : (
+        <></>
+      )}
 
       {play || toggleCarousel || toggleCustomize ? (
         <></>
