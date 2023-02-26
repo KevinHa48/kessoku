@@ -3,10 +3,10 @@ import InitialScene from "./components/InitialScene";
 
 function App() {
   return (
-    <div className="w-screen h-screen">
+    <>
       <Landing />
       <InitialScene />
-    </div>
+    </>
   );
 }
 
