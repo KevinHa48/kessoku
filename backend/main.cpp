@@ -1,67 +1,93 @@
-#include "crow_all.h"
-#include <cstdlib>
-#include <iostream>
-#include <unordered_set>
-#include <thread>
+
+#include "MainComponent.h"
 #include "AudioLogic.h"
+#include "server.h"
+#include <thread>
 
-std::unordered_set<crow::websocket::connection*> users;
-std::mutex mtx;
-AudioLogic* logic;
-
-std::string parse_data(){
-    std::vector<float> data;
-    std::copy (data.begin(), data.end(), logic->data_buffer);
-    std::string result;
-    for(unsigned long i=0; i<data.size(); i++){
-        result.append(std::to_string(data[i]));
-        if (i != data.size()-1){
-            result.append(" ");
-        }
-    }
-    return result;
-}
-
-[[noreturn]] void loop() {
-    while (true) {
-        if (logic->data_buffer != nullptr) {
-            for (auto user: users) {
-                user->send_text(parse_data());
-            }
-        }
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    }
-}
-
-int main()
+//==============================================================================
+class GuiAppApplication  : public juce::JUCEApplication
 {
-    crow::SimpleApp app;
-    int port = 18080;
+public:
+    //==============================================================================
+    GuiAppApplication() {}
 
-    CROW_ROUTE(app, "/audio")
-        .websocket()
-        .onopen([&](crow::websocket::connection& conn){
-            CROW_LOG_INFO << "Socket connection established";
-            std::lock_guard<std::mutex> _(mtx);
-            users.insert(&conn);
-            if (users.size() == 1){
-                logic = new AudioLogic();
-            }
-        })
-        .onclose([&](crow::websocket::connection& conn, const std::string& reason){
-            CROW_LOG_INFO << "Socket connection closed";
-            std::lock_guard<std::mutex> _(mtx);
-            users.erase(&conn);
-            if (users.size() == 0 && logic != NULL){
-                free(logic);
-            }
-        });
+    // We inject these as compile definitions from the CMakeLists.txt
+    // If you've enabled the juce header with `juce_generate_juce_header(<thisTarget>)`
+    // you could `#include <JuceHeader.h>` and use `ProjectInfo::projectName` etc. instead.
+    const juce::String getApplicationName() override       { return JUCE_APPLICATION_NAME_STRING; }
+    const juce::String getApplicationVersion() override    { return JUCE_APPLICATION_VERSION_STRING; }
+    bool moreThanOneInstanceAllowed() override             { return true; }
 
-    CROW_ROUTE(app, "/heartbeat")([](){
-        return "Success!";
-    });
+    //==============================================================================
+    void initialise (const juce::String&) override
+    {
+        //AudioLogic* logic;
+        //logic = new AudioLogic();
+        mainWindow.reset (new MainWindow ("backend", new AudioLogic, *this));
+        //std::thread t1(start_server, logic);
+    }
 
-    std::thread t1(loop);
+    void shutdown() override
+    {
+        // Add your application's shutdown code here..
 
-    app.port(port).run();
-}
+        mainWindow = nullptr; // (deletes our window)
+    }
+
+    //==============================================================================
+    void systemRequestedQuit() override
+    {
+        // This is called when the app is being asked to quit: you can ignore this
+        // request and let the app carry on running, or call quit() to allow the app to close.
+        quit();
+    }
+
+    void anotherInstanceStarted (const juce::String& commandLine) override
+    {
+        // When another instance of the app is launched while this one is running,
+        // this method is invoked, and the commandLine parameter tells you what
+        // the other instance's command-line arguments were.
+        juce::ignoreUnused (commandLine);
+    }
+
+private:
+    class MainWindow    : public juce::DocumentWindow
+    {
+    public:
+        MainWindow (const juce::String& name, juce::Component* c, JUCEApplication& a)
+                : DocumentWindow (name, juce::Desktop::getInstance().getDefaultLookAndFeel()
+                                          .findColour (ResizableWindow::backgroundColourId),
+                                  juce::DocumentWindow::allButtons),
+                  app (a)
+        {
+            setUsingNativeTitleBar (true);
+            setContentOwned (c, true);
+
+#if JUCE_ANDROID || JUCE_IOS
+            setFullScreen (true);
+#else
+            setResizable (true, false);
+            setResizeLimits (300, 250, 10000, 10000);
+            centreWithSize (getWidth(), getHeight());
+#endif
+
+            setVisible (true);
+        }
+
+        void closeButtonPressed() override
+        {
+            app.systemRequestedQuit();
+        }
+
+    private:
+        JUCEApplication& app;
+
+        //==============================================================================
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainWindow)
+    };
+
+    std::unique_ptr<MainWindow> mainWindow;
+};
+
+//==============================================================================
+START_JUCE_APPLICATION (GuiAppApplication)

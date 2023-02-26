@@ -46,15 +46,8 @@ juce_add_gui_app(backend PRODUCT_NAME "backend")
 target_sources(backend
         PRIVATE
         main.cpp
+        MainComponent.cpp
         )
-
-#juce_add_gui_app(backend
-#        # VERSION ...                       # Set this if the app version is different to the project version
-#        # ICON_BIG ...                      # ICON_* arguments specify a path to an image file to use as an icon
-#        # ICON_SMALL ...
-#        # DOCUMENT_EXTENSIONS ...           # Specify file extensions that should be associated with this app
-#        # COMPANY_NAME ...                  # Specify the name of the app's author
-#        PRODUCT_NAME "Gui App Example")     # The name of the final executable, which can differ from the target name
 
 find_package(Boost COMPONENTS REQUIRED)
 if(Boost_FOUND)

@@ -19,7 +19,6 @@ public:
             : forwardFFT (fftOrder),
               spectrogramImage (juce::Image::RGB, 512, 512, true)
     {
-        setOpaque (true);
         setAudioChannels (2, 0);  // we want a couple of input channels but no outputs
         startTimerHz (60);
         setSize (700, 500);
