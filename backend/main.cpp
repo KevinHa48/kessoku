@@ -24,7 +24,7 @@ void loop(){
         for(std::unordered_set<crow::websocket::connection*>::iterator it = users.begin(); it != users.end(); ++it){
             (*it)->send_text(mock_data());
         }
-        std::this_thread::sleep_for(std::chrono::milliseconds());
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 }
 
