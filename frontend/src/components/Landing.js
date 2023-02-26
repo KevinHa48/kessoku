@@ -12,7 +12,7 @@ export default function Landing({ handlePlay }) {
       <div className="flex flex-col items-center space-y-6">
         <span className="flex items-center justify-center">
           <img
-            className="w-full cursor-pointer"
+            className="w-full"
             src={require("../images/bocchi_square.jpg")}
           ></img>
           <img

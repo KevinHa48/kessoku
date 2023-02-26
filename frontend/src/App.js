@@ -19,9 +19,9 @@ function App() {
   const [prevWSData, setPrevWSData] = useState("");
   const [style, setStyle] = useState({
     style: "reflection",
-    width: "0.2",
-    depth: "0.2",
-    gap: "0",
+    width: "0.075",
+    depth: "0.075",
+    gap: "1",
     colors: ["#6B8CC0", "#F6BECA", "#E26A58"],
   });
   const [play, setPlay] = useState(false);
@@ -33,8 +33,8 @@ function App() {
   }
 
   function handleStyle(obj, cancel) {
-    if (cancel) {
-      console.log(obj);
+    if (!cancel) {
+      // console.log(obj);
       setStyle(obj);
     }
     setToggleCustomize(false);
@@ -45,18 +45,18 @@ function App() {
     if (opt === "ryou") {
       setStyle({
         style: "reflection",
-        width: "0.1",
-        depth: "0.1",
+        width: "0.075",
+        depth: "0.075",
         gap: "4",
         colors: ["#758EB6", "#4272BF", "#1A3561"],
       });
     } else if (opt === "nijika") {
       setStyle({
         style: "histogram",
-        width: "0.2",
-        depth: "0.2",
+        width: "0.1",
+        depth: "0.1",
         gap: "0",
-        colors: ["#1A3561", "#EDD280", "#C3A95A"],
+        colors: ["#8EA7CF", "#EDD280", "#C3A95A"],
       });
     } else if (opt === "kita") {
       setToggleCustomize(true);
@@ -131,7 +131,7 @@ function App() {
         style={style}
         data={WSData.split(" ")}
         prevData={prevWSData.split(" ")}
-        scale={4}
+        scale={2}
       />
     </>
   );
