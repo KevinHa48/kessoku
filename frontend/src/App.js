@@ -1,16 +1,12 @@
-import logo from "./logo.svg";
-import "./App.css";
+import Landing from "./components/Landing";
+import InitialScene from "./components/InitialScene";
 
 function App() {
   return (
-    <>
-      <a-scene>
-        <a-marker preset="hiro">
-          <a-box position="0 0 0" material="color: red;"></a-box>
-        </a-marker>
-        <a-entity camera="userHeight: 0;"></a-entity>
-      </a-scene>
-    </>
+    <div className="w-screen h-screen">
+      <Landing />
+      <InitialScene />
+    </div>
   );
 }
 
