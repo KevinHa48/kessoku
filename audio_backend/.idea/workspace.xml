@@ -8,7 +8,7 @@
   </component>
   <component name="CMakeRunConfigurationManager">
     <generated>
-      <config projectName="backend" targetName="backend" />
+      <config projectName="audio_backend" targetName="audio_backend" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -17,24 +17,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db75a134-74bc-4469-af42-52ab588418c5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kessoku.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AudioLogic.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainComponent.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainComponent.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/third_party/JUCE" beforeDir="false" />
-    </list>
+    <list default="true" id="db75a134-74bc-4469-af42-52ab588418c5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,15 +28,10 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/third_party/JUCE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProjectApplicationVersion">
-    <option name="ide" value="CLion" />
-    <option name="majorVersion" value="2022" />
-    <option name="minorVersion" value="2.3" />
   </component>
   <component name="ProjectId" id="2MGuSS3CgMNeiwbqVptaBEOTqeQ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -81,7 +59,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="backend" TARGET_NAME="backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="backend" RUN_TARGET_NAME="backend">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="audio_backend" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="audio_backend" TARGET_NAME="audio_backend" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="audio_backend" RUN_TARGET_NAME="audio_backend">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -97,9 +80,9 @@
       <updated>1677406239465</updated>
       <workItem from="1677406240697" duration="1900000" />
       <workItem from="1677408675799" duration="785000" />
-      <workItem from="1677418416982" duration="634000" />
-      <workItem from="1677419895075" duration="150000" />
-      <workItem from="1677420087292" duration="80000" />
+      <workItem from="1677419052101" duration="842000" />
+      <workItem from="1677420045867" duration="41000" />
+      <workItem from="1677420167846" duration="20000" />
     </task>
     <servers />
   </component>
