@@ -1,10 +1,10 @@
 #pragma once
 
-#include <juce_gui_extra/juce_gui_extra.h>
-#include <juce_audio_devices/juce_audio_devices.h>
-#include <juce_audio_utils/juce_audio_utils.h>
-#include <juce_events/juce_events.h>
-#include <juce_dsp/juce_dsp.h>
+#include "juce_gui_extra/juce_gui_extra.h"
+#include "juce_audio_devices/juce_audio_devices.h"
+#include "juce_audio_utils/juce_audio_utils.h"
+#include "juce_events/juce_events.h"
+#include "juce_dsp/juce_dsp.h"
 #include<math.h>
 
 
