@@ -64,21 +64,30 @@ export default function Customize({ handleStyle }) {
       </table>
       <button
         onClick={() =>
-          handleStyle({
-            style: styleRef.current.value,
-            width: widthRef.current.value,
-            depth: depthRef.current.value,
-            gap: gapRef.current.value,
-            colors: [
-              colorRef1.current.value,
-              colorRef2.current.value,
-              colorRef3.current.value,
-            ],
-          })
+          handleStyle(
+            {
+              style: styleRef.current.value,
+              width: widthRef.current.value,
+              depth: depthRef.current.value,
+              gap: gapRef.current.value,
+              colors: [
+                colorRef1.current.value,
+                colorRef2.current.value,
+                colorRef3.current.value,
+              ],
+            },
+            false
+          )
         }
         className="mt-8 text-white text-3xl"
       >
         Submit
+      </button>
+      <button
+        onClick={() => handleStyle({}, true)}
+        className="mt-8 text-white text-xl"
+      >
+        Cancel
       </button>
     </div>
   );
