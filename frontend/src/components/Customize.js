@@ -4,6 +4,7 @@ export default function Customize({ handleStyle }) {
   const styleRef = useRef("");
   const widthRef = useRef(0.2);
   const depthRef = useRef(0.2);
+  const gapRef = useRef(0);
   const colorRef1 = useRef("");
   const colorRef2 = useRef("");
   const colorRef3 = useRef("");
@@ -17,7 +18,7 @@ export default function Customize({ handleStyle }) {
           </td>
           <td>
             <select name="style" ref={styleRef}>
-              <option value="bar">Bar</option>
+              <option value="histogram">Bar</option>
               <option value="reflection">Reflection</option>
             </select>
           </td>
@@ -40,12 +41,20 @@ export default function Customize({ handleStyle }) {
         </tr>
         <tr>
           <td>
+            <label>Gap</label>
+          </td>
+          <td>
+            <input type="number" ref={gapRef} defaultValue="0" />
+          </td>
+        </tr>
+        <tr>
+          <td>
             <label>Color</label>
           </td>
           <td>
-            <input type="color" ref={colorRef1} />
-            <input type="color" ref={colorRef2} />
-            <input type="color" ref={colorRef3} />
+            <input type="color" ref={colorRef1} defaultValue="#6B8CC0" />
+            <input type="color" ref={colorRef2} defaultValue="#F6BECA" />
+            <input type="color" ref={colorRef3} defaultValue="#E26A58" />
           </td>
         </tr>
       </table>
@@ -55,6 +64,7 @@ export default function Customize({ handleStyle }) {
             style: styleRef.current.value,
             width: widthRef.current.value,
             depth: depthRef.current.value,
+            gap: gapRef.current.value,
             colors: [
               colorRef1.current.value,
               colorRef2.current.value,

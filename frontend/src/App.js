@@ -18,12 +18,14 @@ function App() {
   const [WSData, setWSData] = useState("");
   const [prevWSData, setPrevWSData] = useState("");
   const [style, setStyle] = useState({
-    style: "reflection",
+    style: "histogram",
     width: "0.2",
     depth: "0.2",
+    gap: "0",
     colors: ["#6B8CC0", "#F6BECA", "#E26A58"],
   });
   const [play, setPlay] = useState(false);
+  const [toggleCarousel, setToggleCarousel] = useState(false);
   const [toggleCustomize, setToggleCustomize] = useState(false);
 
   function handlePlay() {
@@ -34,6 +36,11 @@ function App() {
     console.log(obj);
     setStyle(obj);
     setToggleCustomize(false);
+  }
+
+  function handleCarousel() {
+    setToggleCustomize(true);
+    setToggleCarousel(false);
   }
 
   ws.onmessage = (e) => {
@@ -55,10 +62,35 @@ function App() {
         className={`fixed !text-[3vw] z-10 top-0 right-0 m-8 cursor-pointer text-white ${
           play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
         } hover:text-[#F6BECA]`}
-        onClick={() => setToggleCustomize(true)}
+        onClick={() => setToggleCarousel(true)}
       />
 
-      {play ? <></> : <Landing handlePlay={handlePlay} />}
+      {play || toggleCarousel || toggleCustomize ? (
+        <></>
+      ) : (
+        <Landing handlePlay={handlePlay} />
+      )}
+      {toggleCarousel ? (
+        <div className="fixed w-screen h-screen backdrop-blur-md bg-black bg-opacity-80 flex items-center justify-center">
+          <Carousel>
+            <CarouselItem background-image="./images/ryo_square.jpg">
+              <img src="./images/ryo_square.jpg"></img>
+            </CarouselItem>
+            <CarouselItem background-image="./images/ryo_square.jpg">
+              <img src="./images/nijika_square.jpg"></img>
+            </CarouselItem>
+            <CarouselItem background-image="./images/ryo_square.jpg">
+              <img
+                onClick={handleCarousel}
+                src="./images/ikuyo_square.png"
+              ></img>
+            </CarouselItem>
+          </Carousel>
+        </div>
+      ) : (
+        <></>
+      )}
+
       {toggleCustomize ? <Customize handleStyle={handleStyle} /> : <></>}
 
       <InitialScene
@@ -68,12 +100,6 @@ function App() {
         prevData={prevWSData.split(" ")}
         scale={4}
       />
-
-      {/* <Carousel>
-        <CarouselItem background-image="./images/ryo_square.jpg"><img src="./images/ryo_square.jpg"></img></CarouselItem>
-        <CarouselItem background-image="./images/ryo_square.jpg"><img src="./images/nijika_square.jpg"></img></CarouselItem>
-        <CarouselItem background-image="./images/ryo_square.jpg"><img src="./images/ikuyo_square.png"></img></CarouselItem>
-      </Carousel> */}
     </>
   );
 }

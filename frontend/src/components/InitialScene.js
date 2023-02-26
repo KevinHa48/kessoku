@@ -2,25 +2,32 @@ export default function InitialScene({ enable, style, data, prevData, scale }) {
   return (
     <div className="relative w-full h-full z-[-1]">
       <a-scene vr-mode-ui="enabled: false">
-          <a-marker preset="custom" type="pattern" url="./markers/HRU_2.patt">
+        <a-marker
+          preset="custom"
+          type="pattern"
+          url="./markers/pattern-HackRU_black.patt"
+        >
+          {/* <a-marker preset="hiro"> */}
           {/* two basic cubes side by side */}
           {/* {/* <a-box position="0 0 0" material="color: red;"></a-box> */}
-          <a-box
-            src="./vaporwave-texture.jpg"
-            position="0 -0.1 0"
-            height="0.0001"
-            depth="6"
-            width="6"
-            material="color: white;"
-          ></a-box>
 
           {enable ? (
-            <Scene
-              style={style}
-              data={data}
-              prevData={prevData}
-              scale={scale}
-            />
+            <>
+              {/* <a-box
+                src="./vaporwave-texture.jpg"
+                position="0 -0.1 0"
+                height="0.0001"
+                depth="3"
+                width="6"
+                material="color: white;"
+              ></a-box> */}
+              <Scene
+                style={style}
+                data={data}
+                prevData={prevData}
+                scale={scale}
+              />
+            </>
           ) : (
             <></>
           )}
@@ -63,8 +70,8 @@ const Scene = ({ style, prevData, scale }) => {
       data.map((x, i) => (
         <a-box
           position={`${(
-            i * style.width -
-            Number(style.width) * 15
+            i * (style.width + style.gap) -
+            Number(style.width + style.gap) * 15
           ).toString()} 2 0`}
           width={style.width}
           depth={style.depth}
@@ -98,11 +105,11 @@ const Scene = ({ style, prevData, scale }) => {
         return (
           <a-box
             // metalness="0.5"
-            src="./texture.jpg"
-            repeat="100 100"
+            // src="./texture.jpg"
+            // repeat="100 100"
             position={`${(
-              i * style.width -
-              Number(style.width) * 15
+              i * (style.width + style.gap) -
+              Number(style.width + style.gap) * 15
             ).toString()} ${
               Number(x) === 0
                 ? "0.0001"

@@ -6,7 +6,7 @@ import "./Carousel.css";
 export const CarouselItem = ({ children, width }) => {
   return (
     <div className="carousel-item" style={{ width: width }}>
-        {children}
+      {children}
     </div>
   );
 };
@@ -26,14 +26,11 @@ const Carousel = ({ children }) => {
 
   const handlers = useSwipeable({
     onSwipedLeft: () => updateIndex(activeIndex + 1),
-    onSwipedRight: () => updateIndex(activeIndex - 1)
+    onSwipedRight: () => updateIndex(activeIndex - 1),
   });
 
   return (
-    <div
-      {...handlers}
-      className="carousel"
-    >
+    <div {...handlers} className="carousel">
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -46,7 +43,9 @@ const Carousel = ({ children }) => {
         {React.Children.map(children, (child, index) => {
           return (
             <button
-              className={`${index === activeIndex ? "active button" : "button"}`}
+              className={`${
+                index === activeIndex ? "active button" : "button"
+              }`}
               onClick={() => {
                 updateIndex(index);
               }}
