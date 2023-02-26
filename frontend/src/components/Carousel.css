@@ -13,6 +13,7 @@
   .inner {
     white-space: nowrap;
     transition: transform 0.3s;
+    color: white;
   }
   
   .carousel-item {
@@ -24,8 +25,11 @@
   }
   
   .indicators {
+    white-space: nowrap;
+    transition: transform 0.3s;
     display: flex;
     justify-content: center;
+    color: white;
   }
   
   .indicators > button {

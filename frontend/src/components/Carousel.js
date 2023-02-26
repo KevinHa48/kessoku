@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 
 import "./Carousel.css";
 
@@ -45,6 +47,7 @@ const Carousel = ({ children }) => {
       <div className="carousel-header">
         <h1>{header}</h1>
       </div>
+
       <div
         className="inner"
         style={{ transform: `translateX(-${activeIndex * 100}%)` }}
@@ -53,21 +56,21 @@ const Carousel = ({ children }) => {
           return React.cloneElement(child, { width: "100%" });
         })}
       </div>
+
       <div className="indicators">
-        {React.Children.map(children, (child, index) => {
-          return (
-            <button
-              className={`${
-                index === activeIndex ? "active button" : "button"
-              }`}
-              onClick={() => {
-                updateIndex(index);
-              }}
-            >
-              {index + 1}
-            </button>
-          );
-        })}
+        <button 
+            onClick={() => {
+              updateIndex(activeIndex - 1);
+            }}>
+          <NavigateBeforeIcon style={{fontSize: '350%'}} />
+        </button>
+
+        <button
+          onClick={() => {
+            updateIndex(activeIndex + 1);
+          }}>
+          <NavigateNextIcon style={{fontSize: '350%'}} />
+        </button>
       </div>
     </div>
   );
