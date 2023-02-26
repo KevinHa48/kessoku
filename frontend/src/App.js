@@ -96,25 +96,22 @@ function App() {
               play ? "backdrop-blur-md bg-black bg-opacity-50" : ""
             } hover:text-[#F6BECA]`}
           />
-          <Carousel>
-            <CarouselItem>
+          <Carousel handleCarousel={handleCarousel}>
+            <CarouselItem >
               <img
                 className="cursor-pointer"
-                onClick={() => handleCarousel("ryou")}
                 src="./images/ryo_square.jpg"
               ></img>
             </CarouselItem>
             <CarouselItem>
               <img
                 className="cursor-pointer"
-                onClick={() => handleCarousel("nijika")}
                 src="./images/nijika_square.jpg"
               ></img>
             </CarouselItem>
             <CarouselItem>
               <img
                 className="cursor-pointer"
-                onClick={() => handleCarousel("kita")}
                 src="./images/ikuyo_square.png"
               ></img>
             </CarouselItem>

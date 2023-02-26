@@ -6,7 +6,7 @@ import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 
 import "./Carousel.css";
 
-export const CarouselItem = ({ children, width }) => {
+export const CarouselItem = ({ children, width, handleCarousel }) => {
   return (
     <div className="carousel-item" style={{ width: width }}>
       {children}
@@ -14,7 +14,7 @@ export const CarouselItem = ({ children, width }) => {
   );
 };
 
-export default function Carousel({ children, handlePlay }) {
+export default function Carousel({ children, handlePlay, handleCarousel }) {
   const [vinyl, setVinyl] = useState("0px");
   const [activeIndex, setActiveIndex] = useState(0);
   let header = "";
@@ -81,7 +81,7 @@ export default function Carousel({ children, handlePlay }) {
             <PlayCircleOutlineIcon
               onMouseEnter={() => setVinyl("20%")}
               onMouseLeave={() => setVinyl("0px")}
-              onClick={handlePlay}
+              onClick={() => handleCarousel(activeIndex === 0 ? "ryou" : (activeIndex === 1 ? "nijika" : "kita"))}
               className="!text-[3vw] cursor-pointer text-white hover:text-[#F6BECA]"
             />
             <SkipNextIcon
