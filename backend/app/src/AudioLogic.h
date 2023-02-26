@@ -13,7 +13,7 @@ class AudioLogic   : public juce::AudioAppComponent,
                                private juce::Timer
 {
 public:
-    float* data_buffer[30];
+    float data_buffer[30];
 
     AudioLogic()
             : forwardFFT (fftOrder),
@@ -23,7 +23,7 @@ public:
         setAudioChannels (2, 0);  // we want a couple of input channels but no outputs
         startTimerHz (60);
         setSize (700, 500);
-        std::fill_n(*data_buffer, sizeof(data_buffer) / (sizeof(float)), 0.0f);
+        std::fill_n(data_buffer, sizeof(data_buffer) / sizeof(float), 0.0f);
     }
 
     ~AudioLogic() override
@@ -50,7 +50,7 @@ public:
     {
         if (nextFFTBlockReady)
         {
-            drawNextLineOfSpectrogram();
+            addToBuffer();
             nextFFTBlockReady = false;
             repaint();
         }
@@ -75,7 +75,7 @@ public:
         fifo[(size_t) fifoIndex++] = sample; // [9]
     }
 
-    void drawNextLineOfSpectrogram()
+    void addToBuffer()
     {
         // then render our FFT data..
         forwardFFT.performFrequencyOnlyForwardTransform (fftData.data());                   // [2]
@@ -85,8 +85,8 @@ public:
             auto skewedProportionY = 1.0f - std::exp (std::log ((float) y / (float) 512) * 0.2f);
             auto fftDataIndex = (size_t) juce::jlimit (0, fftSize / 2, (int) (skewedProportionY * fftSize / 2));
             auto fft_level = juce::jmap (fftData[fftDataIndex], 0.0f, juce::jmax (fftMaxLevel.getEnd(), 1e-5f), 0.0f, 30.0f);
-            auto volume_level = juce::jmap(fifo[fftDataIndex], 0.0f, juce::jmax(maxLevel.getEnd(), 1e-5f), 0.0f, 30.0f);
-            *(data_buffer)[(int) std::round(fft_level)] = volume_level;
+            auto volume_level = juce::jmap(fifo[fftDataIndex], juce::jmin(-1e-5f, maxLevel.getStart()), juce::jmax(maxLevel.getEnd(), 1e-5f), 0.0f, 10.0f);
+            data_buffer[(int) std::round(fft_level)] = volume_level;
 
         }
     }
@@ -99,7 +99,7 @@ private:
     juce::Image spectrogramImage;
 
     std::array<float, fftSize> fifo;                    // [4]
-    std::array<float, fftSize * 2> fftData;             // [5]
+    std::array<float, fftSize> fftData;             // [5]
     int fifoIndex = 0;                                  // [6]
     bool nextFFTBlockReady = false;                     // [7]
 
